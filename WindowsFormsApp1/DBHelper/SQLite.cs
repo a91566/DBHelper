@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace zsbApps.DBHelper
 {
@@ -43,6 +39,26 @@ namespace zsbApps.DBHelper
 					}
 				}
 			}
+		}
+
+		/// <summary>
+		/// 查询
+		/// </summary>
+		/// <param name="sql">查询语句</param>
+		/// <returns>DataSet</returns>
+		public override DataSet Query(string sql)
+		{
+			return null;
+		}
+
+		/// <summary>
+		/// 查询
+		/// </summary>
+		/// <param name="sql">查询语句</param>
+		/// <returns>DataTable</returns>
+		public override DataTable QueryTable(string sql)
+		{
+			return null;
 		}
 	}
 }

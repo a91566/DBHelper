@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace zsbApps.DBHelper
 {
@@ -35,7 +30,18 @@ namespace zsbApps.DBHelper
 		/// <returns>影响行数</returns>
 		public abstract int ExecuteSql(string exsql);
 
+		/// <summary>
+		/// 查询
+		/// </summary>
+		/// <param name="sql">查询语句</param>
+		/// <returns>DataSet</returns>
 		public abstract DataSet Query(string sql);
+
+		/// <summary>
+		/// 查询
+		/// </summary>
+		/// <param name="sql">查询语句</param>
+		/// <returns>DataTable</returns>
 		public abstract DataTable QueryTable(string sql);
 	}
 }
