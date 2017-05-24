@@ -16,6 +16,8 @@ namespace zsbApps.DBHelper
 			{
 				case DBClassify.MsSql:
 					return new MsSql(connstr);
+				case DBClassify.MySql:
+					return new MySql(connstr);
 				case DBClassify.SQLite:
 					return new SQLite(connstr);
 				default:

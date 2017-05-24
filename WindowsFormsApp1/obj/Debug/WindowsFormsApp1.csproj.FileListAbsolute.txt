@@ -12,3 +12,5 @@ d:\文档\visual studio 2017\Projects\DBHelper\WindowsFormsApp1\bin\Debug\System
 d:\文档\visual studio 2017\Projects\DBHelper\WindowsFormsApp1\bin\Debug\System.Data.SQLite.dll.config
 d:\文档\visual studio 2017\Projects\DBHelper\WindowsFormsApp1\bin\Debug\System.Net.Http.dll
 d:\文档\visual studio 2017\Projects\DBHelper\WindowsFormsApp1\bin\Debug\System.Net.Http.xml
+d:\文档\visual studio 2017\Projects\DBHelper\WindowsFormsApp1\bin\Debug\MySql.Data.dll
+d:\文档\visual studio 2017\Projects\DBHelper\WindowsFormsApp1\bin\Debug\MySql.Data.xml

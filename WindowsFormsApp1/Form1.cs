@@ -40,5 +40,11 @@ namespace WindowsFormsApp1
 				MessageBox.Show("OK");
 			}
 		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			string connstr = @"host=localhost;database=test170525;uid=root;pwd=123456;Port=3306";
+			this.addOneData(DBClassify.MySql, connstr);
+		}
 	}
 }
