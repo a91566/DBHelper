@@ -13,37 +13,68 @@ namespace WindowsFormsApp1
 {
 	public partial class Form1 : Form
 	{
+		public struct DB
+		{
+			public DBHelper MsSql;
+			public DBHelper MySql;
+			public DBHelper Sqlite;
+		}
+		private DB db;
+
 		public Form1()
 		{
 			InitializeComponent();
-		}
+			this.db = new DB();
 
-		private void button1_Click(object sender, EventArgs e)
-		{
 			string connstr = @"server=cc;database=ZrTBM;uid=sa;pwd=123456";
-			this.addOneData(DBClassify.MsSql, connstr);
+			db.MsSql = DBHelper.Instance(DBClassify.MsSql, connstr);
+
+			connstr = @"host=localhost;database=test170525;uid=root;pwd=a91566;Port=3306";
+			connstr = @"host=localhost;database=test170525;uid=root;pwd=123456;Port=3306";
+			db.MySql = DBHelper.Instance(DBClassify.MySql, connstr);
+
+			connstr = $@"Data Source={ Application.StartupPath }\temp.sqlite3;Version=3;";
+			db.Sqlite = DBHelper.Instance(DBClassify.SQLite, connstr);
 		}
 
-		private void button2_Click(object sender, EventArgs e)
+		public DBHelper getInstanceIndex()
 		{
-			string connstr = $@"Data Source={ Application.StartupPath }\temp.sqlite3;Version=3;";
-			this.addDataList(DBClassify.SQLite, connstr);
+			if (radioButton1.Checked)
+			{
+				return db.MsSql;
+			}
+			else if (radioButton2.Checked)
+			{
+				return db.Sqlite;
+			}
+			else if (radioButton3.Checked)
+			{
+				return db.MySql;
+			}
+			else
+			{
+				return null;
+			}
 		}
 
-		private void addOneData(DBClassify db, string connstr)
+		private void addOneData(DBHelper a)
 		{
-			DBHelper a = DBHelper.Instance(db, connstr);
+			this.Text = a.ToString();
 			string exsql = $"INSERT INTO a(a)VALUES('{System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}')";
 			int x = a.ExecuteSql(exsql);
 			if (x == 1)
 			{
-				MessageBox.Show("OK");
+				MessageBox.Show($"{a.ToString()},OK");
+			}
+			else
+			{
+				MessageBox.Show($"{a.ToString()},false");
 			}
 		}
 
-		private void addDataList(DBClassify db, string connstr)
+		private void addDataList(DBHelper a)
 		{
-			DBHelper a = DBHelper.Instance(db, connstr);
+			this.Text = a.ToString();
 			List<string> list = new List<string>();
 			for (int i = 0; i < 10; i++)
 			{
@@ -54,14 +85,59 @@ namespace WindowsFormsApp1
 			//这一句异常，程序抛出错误
 			//list.Add($"INSERT INTO a(a,b)VALUES('{System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}')");
 			int x = a.ExecuteSql(list);
-			MessageBox.Show($"影响行数:{x}");
+			MessageBox.Show($"{a.ToString()},影响行数:{x}");
 		}
 
-		private void button3_Click(object sender, EventArgs e)
+		private void getSingle(DBHelper a)
 		{
-			string connstr = @"host=localhost;database=test170525;uid=root;pwd=123456;Port=3306";
-			connstr = @"host=localhost;database=test170525;uid=root;pwd=a91566;Port=3306";
-			this.addDataList(DBClassify.MySql, connstr);
+			this.Text = a.ToString();
+			string sql;
+			if ((a as IDBClassify).GetClassify() == DBClassify.MsSql)
+			{
+				sql = "SELECT TOP 1 a FROM a ORDER BY id DESC";
+			}
+			else
+			{
+				sql = "SELECT a FROM a ORDER BY id DESC limit 0,1;";
+			}
+			object x = a.GetSingle(sql);
+			if (x == null)
+			{
+				MessageBox.Show($"{a.ToString()},is null");
+			}
+			else
+			{
+				MessageBox.Show($"{a.ToString()},{x.ToString()}");
+			}
+		}
+
+		private void queryTable(DBHelper a)
+		{
+			this.Text = a.ToString();
+			string sql = $"SELECT * FROM a";
+			this.dataGridView1.DataSource = a.QueryTable(sql);
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{			
+			addOneData(getInstanceIndex());
+		}
+
+		
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			addDataList(getInstanceIndex());
+		}
+
+		private void button5_Click(object sender, EventArgs e)
+		{
+			getSingle(getInstanceIndex());
+		}
+
+		private void button6_Click(object sender, EventArgs e)
+		{
+			queryTable(getInstanceIndex());
 		}
 	}
 }

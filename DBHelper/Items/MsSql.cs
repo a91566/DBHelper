@@ -1,21 +1,19 @@
 ﻿/*
- * 2017年5月25日 13:48:59 郑少宝
+ * 2017年5月25日 13:48:29 郑少宝
  * 
- * 比起天黑天塌
- * 我更害怕
- * 你皱眉
+ * 在这个什么都善变的人间
+ * 我想和你
+ * 看一看永远
+ * 
  */
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using MySql.Data.MySqlClient;
-
+using System.Data.SqlClient;
 
 namespace zsbApps.DBHelper
 {
-	public class MySql : DBHelper
+	public class MsSql : DBHelper, IDBClassify
 	{
 		/// <summary>
 		/// 连接字符串
@@ -26,7 +24,7 @@ namespace zsbApps.DBHelper
 		/// 构造函数
 		/// </summary>
 		/// <param name="connStr">连接字符串</param>
-		public MySql(string connStr)
+		public MsSql(string connStr)
 		{
 			this._connStr = connStr;
 		}
@@ -38,9 +36,9 @@ namespace zsbApps.DBHelper
 		/// <returns>影响行数</returns>
 		public override int ExecuteSql(string exsql)
 		{
-			using (MySqlConnection connection = new MySqlConnection(this._connStr))
+			using (SqlConnection connection = new SqlConnection(this._connStr))
 			{
-				using (MySqlCommand cmd = new MySqlCommand(exsql, connection))
+				using (SqlCommand cmd = new SqlCommand(exsql, connection))
 				{
 					try
 					{
@@ -48,10 +46,10 @@ namespace zsbApps.DBHelper
 						int rows = cmd.ExecuteNonQuery();
 						return rows;
 					}
-					catch (MySqlException e)
+					catch (SqlException ex)
 					{
 						connection.Close();
-						throw e;
+						throw ex;
 					}
 				}
 			}
@@ -64,13 +62,13 @@ namespace zsbApps.DBHelper
 		/// <returns>影响行数</returns>
 		public override int ExecuteSql(List<string> listSql)
 		{
-			using (MySqlConnection connection = new MySqlConnection(this._connStr))
+			using (SqlConnection connection = new SqlConnection(this._connStr))
 			{
 				try
-				{
+				{ 
 					connection.Open();
-					MySqlTransaction tran = connection.BeginTransaction();
-					MySqlCommand cmd = new MySqlCommand();
+					SqlTransaction tran = connection.BeginTransaction();
+					SqlCommand cmd = new SqlCommand();
 					cmd.Connection = connection;
 					int result = 0;
 					foreach (var item in listSql)
@@ -82,11 +80,11 @@ namespace zsbApps.DBHelper
 					tran.Commit();
 					return result;
 				}
-				catch (MySqlException e)
+				catch (SqlException ex)
 				{
 					connection.Close();
-					throw e;
-				}
+					throw ex;
+				}				
 			}
 		}
 
@@ -110,6 +108,31 @@ namespace zsbApps.DBHelper
 			return fill(sql, 1);
 		}
 
+		/// <summary>
+		/// 返回第一行第一列 返回类型为 object
+		/// </summary>
+		/// <param name="sql">查询语句</param>
+		/// <returns>返回第一行第一列</returns>
+		public override object GetSingle(string sql)
+		{
+			using (SqlConnection connection = new SqlConnection(this._connStr))
+			{
+				using (SqlCommand cmd = new SqlCommand(sql, connection))
+				{
+					try
+					{
+						connection.Open();
+						return cmd.ExecuteScalar();
+					}
+					catch (SqlException ex)
+					{
+						connection.Close();
+						throw ex;
+					}
+				}
+			}
+		}
+
 		#region 私有函数
 		/// <summary>
 		/// 填充数据集
@@ -131,19 +154,32 @@ namespace zsbApps.DBHelper
 				default:
 					return null;
 			}
-			using (MySqlConnection connection = new MySqlConnection(this._connStr))
+
+			using (SqlConnection connection = new SqlConnection(this._connStr))
 			{
 				try
 				{
 					connection.Open();
-					new MySqlDataAdapter(sql, connection).Fill(result);
+					new SqlDataAdapter(sql, connection).Fill(result);
 					return result;
 				}
-				catch (MySqlException ex)
+				catch (SqlException ex)
 				{
-					throw new Exception(ex.Message);
+					connection.Close();
+					throw ex;
 				}
-			}			
+			}
+		}
+		#endregion
+
+		#region IDBClassify 接口实现
+		/// <summary>
+		/// 获取类型
+		/// </summary>
+		/// <returns>数据库类型</returns>
+		DBClassify IDBClassify.GetClassify()
+		{
+			return DBClassify.MsSql;
 		}
 		#endregion
 	}

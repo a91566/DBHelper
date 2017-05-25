@@ -455,9 +455,8 @@ namespace ZR.Base
                     }
                     catch (SqlException ex)
                     {
-                        trans.Rollback();
-                      // ErrorLog.WriteError.Recode(ex);
-                        throw;
+						conn.Close();
+						throw ex;
                     }
                 }
             }
@@ -711,10 +710,11 @@ namespace ZR.Base
                     command.SelectCommand.CommandTimeout = Times;
                     command.Fill(ds, "ds");
                 }
-                catch (System.Data.SqlClient.SqlException ex)
+                catch (SqlException ex)
                 {
-                  // ErrorLog.WriteError.Recode(ex);
-                }
+					connection.Close();
+					throw ex;
+				}
                 return ds;
             }
         }
@@ -782,10 +782,9 @@ namespace ZR.Base
                     }
                     catch(SqlException ex)
                     {
-                        trans.Rollback();
-                      // ErrorLog.WriteError.Recode(ex);
-                        throw;
-                    }
+						conn.Close();
+						throw ex;
+					}
                 }
             }
         }
@@ -952,10 +951,9 @@ namespace ZR.Base
                     }
                     catch(SqlException ex)
                     {
-                        trans.Rollback();
-                      // ErrorLog.WriteError.Recode(ex);
-                        throw;
-                    }
+						conn.Close();
+						throw ex;
+					}
                 }
             }
         }

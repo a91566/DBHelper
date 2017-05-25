@@ -1,0 +1,9 @@
+d:\文档\visual studio 2017\Projects\DBHelper\DBHelper\bin\Debug\DBHelper.dll
+d:\文档\visual studio 2017\Projects\DBHelper\DBHelper\bin\Debug\DBHelper.pdb
+d:\文档\visual studio 2017\Projects\DBHelper\DBHelper\bin\Debug\MySql.Data.dll
+d:\文档\visual studio 2017\Projects\DBHelper\DBHelper\bin\Debug\System.Data.SQLite.dll
+d:\文档\visual studio 2017\Projects\DBHelper\DBHelper\bin\Debug\MySql.Data.xml
+d:\文档\visual studio 2017\Projects\DBHelper\DBHelper\bin\Debug\System.Data.SQLite.pdb
+d:\文档\visual studio 2017\Projects\DBHelper\DBHelper\bin\Debug\System.Data.SQLite.dll.config
+d:\文档\visual studio 2017\Projects\DBHelper\DBHelper\obj\Debug\DBHelper.dll
+d:\文档\visual studio 2017\Projects\DBHelper\DBHelper\obj\Debug\DBHelper.pdb
