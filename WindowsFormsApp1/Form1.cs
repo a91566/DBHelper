@@ -26,8 +26,8 @@ namespace WindowsFormsApp1
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			string connstr = @"Data Source=D:\Work\DB\DBFile\SQLite\temp.db;Version=3;";
-			this.addOneData(DBClassify.SQLite, connstr);
+			string connstr = $@"Data Source={ Application.StartupPath }\temp.sqlite3;Version=3;";
+			this.addDataList(DBClassify.SQLite, connstr);
 		}
 
 		private void addOneData(DBClassify db, string connstr)
@@ -41,10 +41,27 @@ namespace WindowsFormsApp1
 			}
 		}
 
+		private void addDataList(DBClassify db, string connstr)
+		{
+			DBHelper a = DBHelper.Instance(db, connstr);
+			List<string> list = new List<string>();
+			for (int i = 0; i < 10; i++)
+			{
+				list.Add($"INSERT INTO a(a)VALUES('{System.DateTime.Now.AddHours(i).ToString("yyyy-MM-dd HH:mm:ss")}')");
+			}
+			//这句可以执行成功，但是被阶段，前20（数据库长度设置）
+			list.Add($"INSERT INTO a(a)VALUES('111111{System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:ddd")}')");
+			//这一句异常，程序抛出错误
+			//list.Add($"INSERT INTO a(a,b)VALUES('{System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}')");
+			int x = a.ExecuteSql(list);
+			MessageBox.Show($"影响行数:{x}");
+		}
+
 		private void button3_Click(object sender, EventArgs e)
 		{
 			string connstr = @"host=localhost;database=test170525;uid=root;pwd=123456;Port=3306";
-			this.addOneData(DBClassify.MySql, connstr);
+			connstr = @"host=localhost;database=test170525;uid=root;pwd=a91566;Port=3306";
+			this.addDataList(DBClassify.MySql, connstr);
 		}
 	}
 }

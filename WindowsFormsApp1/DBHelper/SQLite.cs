@@ -1,4 +1,12 @@
-﻿using System.Data;
+﻿/*
+ * 2017年5月25日 13:49:24 郑少宝
+ * 
+ * 我们一起量量
+ * 一辈子有多长
+ * 好不好
+ */
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 
 namespace zsbApps.DBHelper
@@ -32,11 +40,44 @@ namespace zsbApps.DBHelper
 						int rows = cmd.ExecuteNonQuery();
 						return rows;
 					}
-					catch (System.Data.SqlClient.SqlException e)
+					catch (SQLiteException e)
 					{
 						connection.Close();
 						throw e;
 					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// 批量执行 sql 语句
+		/// </summary>
+		/// <param name="listSql">执行的 sql 语句集合</param>
+		/// <returns>影响行数</returns>
+		public override int ExecuteSql(List<string> listSql)
+		{
+			using (SQLiteConnection connection = new SQLiteConnection(this._connStr))
+			{
+				try
+				{
+					connection.Open();
+					SQLiteTransaction tran = connection.BeginTransaction();
+					SQLiteCommand cmd = new SQLiteCommand();
+					cmd.Connection = connection;
+					int result = 0;
+					foreach (var item in listSql)
+					{
+						cmd.CommandText = item;
+						int x = cmd.ExecuteNonQuery();
+						result += x >= 0 ? x : 0;
+					}
+					tran.Commit();
+					return result;
+				}
+				catch (SQLiteException e)
+				{
+					connection.Close();
+					throw e;
 				}
 			}
 		}

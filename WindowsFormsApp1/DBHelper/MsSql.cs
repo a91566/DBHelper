@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ * 2017年5月25日 13:48:29 郑少宝
+ * 
+ * 在这个什么都善变的人间
+ * 我想和你
+ * 看一看永远
+ * 
+ */
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -43,6 +52,39 @@ namespace zsbApps.DBHelper
 						throw e;
 					}
 				}
+			}
+		}
+
+		/// <summary>
+		/// 批量执行 sql 语句
+		/// </summary>
+		/// <param name="listSql">执行的 sql 语句集合</param>
+		/// <returns>影响行数</returns>
+		public override int ExecuteSql(List<string> listSql)
+		{
+			using (SqlConnection connection = new SqlConnection(this._connStr))
+			{
+				try
+				{ 
+					connection.Open();
+					SqlTransaction tran = connection.BeginTransaction();
+					SqlCommand cmd = new SqlCommand();
+					cmd.Connection = connection;
+					int result = 0;
+					foreach (var item in listSql)
+					{
+						cmd.CommandText = item;
+						int x = cmd.ExecuteNonQuery();
+						result += x >= 0 ? x : 0;
+					}
+					tran.Commit();
+					return result;
+				}
+				catch (SqlException e)
+				{
+					connection.Close();
+					throw e;
+				}				
 			}
 		}
 

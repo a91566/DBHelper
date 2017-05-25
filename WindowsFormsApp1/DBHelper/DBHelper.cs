@@ -1,4 +1,19 @@
-﻿using System.Data;
+﻿/*
+ * 2017年5月25日 13:46:47 郑少宝
+ * 
+ * 
+ * 备注
+ * 1.长度不够的话会被截断，但是还是会执行成功。
+ * 
+ * 
+ * 
+ * 你的口红
+ * 以后我全包了
+ * 记得每天
+ * 还我一点
+ */
+using System.Collections.Generic;
+using System.Data;
 
 namespace zsbApps.DBHelper
 {
@@ -25,13 +40,7 @@ namespace zsbApps.DBHelper
 			}
 		}
 
-		/// <summary>
-		/// 执行简单的 sql 语句
-		/// </summary>
-		/// <param name="exsql">执行的 sql 语句</param>
-		/// <returns>影响行数</returns>
-		public abstract int ExecuteSql(string exsql);
-
+		#region 查询
 		/// <summary>
 		/// 查询
 		/// </summary>
@@ -45,5 +54,29 @@ namespace zsbApps.DBHelper
 		/// <param name="sql">查询语句</param>
 		/// <returns>DataTable</returns>
 		public abstract DataTable QueryTable(string sql);
+		#endregion
+
+		#region 执行
+
+		/// <summary>
+		/// 执行 sql 语句
+		/// </summary>
+		/// <param name="exsql">执行的 sql 语句</param>
+		/// <returns>影响行数</returns>
+		public abstract int ExecuteSql(string exsql);
+
+		/// <summary>
+		/// 批量执行 sql 语句
+		/// </summary>
+		/// <param name="listSql">执行的 sql 语句集合</param>
+		/// <returns>影响行数</returns>
+		public abstract int ExecuteSql(List<string> listSql);
+		#endregion
+
+
+		//#region #endregion
+
+
+
 	}
 }

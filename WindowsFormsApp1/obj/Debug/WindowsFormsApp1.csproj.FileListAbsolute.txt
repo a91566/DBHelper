@@ -14,3 +14,18 @@ d:\文档\visual studio 2017\Projects\DBHelper\WindowsFormsApp1\bin\Debug\System
 d:\文档\visual studio 2017\Projects\DBHelper\WindowsFormsApp1\bin\Debug\System.Net.Http.xml
 d:\文档\visual studio 2017\Projects\DBHelper\WindowsFormsApp1\bin\Debug\MySql.Data.dll
 d:\文档\visual studio 2017\Projects\DBHelper\WindowsFormsApp1\bin\Debug\MySql.Data.xml
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\bin\Debug\System.Net.Http.dll
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\bin\Debug\MySql.Data.xml
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\bin\Debug\System.Data.SQLite.pdb
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\bin\Debug\System.Data.SQLite.dll.config
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\bin\Debug\System.Net.Http.xml
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\bin\Debug\zh-Hans\System.Net.Http.resources.dll
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojResolveAssemblyReference.cache
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.Cache
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+D:\zsb\vs2017 projects\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
