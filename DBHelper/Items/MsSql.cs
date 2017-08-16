@@ -60,31 +60,65 @@ namespace zsbApps.DBHelper
 		/// </summary>
 		/// <param name="listSql">执行的 sql 语句集合</param>
 		/// <returns>影响行数</returns>
-		public override int ExecuteSql(List<string> listSql)
+		public override (int count, string error) ExecuteSql(List<string> listSql)
 		{
 			using (SqlConnection connection = new SqlConnection(this._connStr))
 			{
+				int count = 0;
+				string error = null;
 				try
 				{ 
 					connection.Open();
-					SqlTransaction tran = connection.BeginTransaction();
 					SqlCommand cmd = new SqlCommand();
 					cmd.Connection = connection;
-					int result = 0;
 					foreach (var item in listSql)
 					{
 						cmd.CommandText = item;
 						int x = cmd.ExecuteNonQuery();
-						result += x >= 0 ? x : 0;
+						count += x >= 0 ? x : 0;
 					}
-					tran.Commit();
-					return result;
 				}
 				catch (SqlException ex)
 				{
 					connection.Close();
-					throw ex;
-				}				
+					error = ex.Message;
+				}
+				return (count: count, error: error);
+			}
+		}
+
+		/// <summary>
+		/// 事务执行 sql 语句
+		/// </summary>
+		/// <param name="listSql">执行的 sql 语句集合</param>
+		/// <returns>影响行数</returns>
+		public override int ExecuteTran(List<string> listSql)
+		{
+			using (SqlConnection connection = new SqlConnection(this._connStr))
+			{	
+				connection.Open();
+				using (SqlCommand cmd = connection.CreateCommand())
+				{
+					SqlTransaction tran = connection.BeginTransaction("tran");
+					cmd.Transaction = tran;
+					try
+					{
+						int x = 0;
+						foreach (var item in listSql)
+						{
+							cmd.CommandText = item;
+							x += cmd.ExecuteNonQuery();
+						}
+						tran.Commit();
+						return x;
+					}
+					catch (SqlException ex)
+					{
+						tran.Rollback();
+						connection.Close();
+						throw ex;
+					}
+				}
 			}
 		}
 

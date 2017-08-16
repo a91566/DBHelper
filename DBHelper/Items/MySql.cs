@@ -62,7 +62,7 @@ namespace zsbApps.DBHelper
 		/// </summary>
 		/// <param name="listSql">执行的 sql 语句集合</param>
 		/// <returns>影响行数</returns>
-		public override int ExecuteSql(List<string> listSql)
+		public override (int count, string error) ExecuteSql(List<string> listSql)
 		{
 			using (MySqlConnection connection = new MySqlConnection(this._connStr))
 			{
@@ -80,7 +80,7 @@ namespace zsbApps.DBHelper
 						result += x >= 0 ? x : 0;
 					}
 					tran.Commit();
-					return result;
+					return (count: result, error: null);
 				}
 				catch (MySqlException e)
 				{
@@ -88,6 +88,16 @@ namespace zsbApps.DBHelper
 					throw e;
 				}
 			}
+		}
+
+		/// <summary>
+		/// 事务执行 sql 语句
+		/// </summary>
+		/// <param name="listSql">执行的 sql 语句集合</param>
+		/// <returns>影响行数</returns>
+		public override int ExecuteTran(List<string> listSql)
+		{
+			throw new Exception("Not Implemented");
 		}
 
 		/// <summary>

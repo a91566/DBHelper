@@ -26,7 +26,7 @@ namespace WindowsFormsApp1
 			InitializeComponent();
 			this.db = new DB();
 
-			string connstr = @"server=cc;database=ZrTBM;uid=sa;pwd=123456";
+			string connstr = @"server=localhost;database=test170525;uid=sa;pwd=1234567";
 			db.MsSql = DBHelper.Instance(DBClassify.MsSql, connstr);
 
 			connstr = @"host=localhost;database=test170525;uid=root;pwd=a91566;Port=3306";
@@ -72,7 +72,7 @@ namespace WindowsFormsApp1
 			}
 		}
 
-		private void addDataList(DBHelper a)
+		private void addDataList(DBHelper a, bool isTran)
 		{
 			this.Text = a.ToString();
 			List<string> list = new List<string>();
@@ -82,10 +82,16 @@ namespace WindowsFormsApp1
 			}
 			//这句可以执行成功，但是被阶段，前20（数据库长度设置）
 			list.Add($"INSERT INTO a(a)VALUES('111111{System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:ddd")}')");
-			//这一句异常，程序抛出错误
-			//list.Add($"INSERT INTO a(a,b)VALUES('{System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}')");
-			int x = a.ExecuteSql(list);
-			MessageBox.Show($"{a.ToString()},影响行数:{x}");
+			if (isTran)
+			{
+				int x = a.ExecuteTran(list);
+				MessageBox.Show($"{a.ToString()},影响行数:{x}");
+			}
+			else
+			{
+				var x = a.ExecuteSql(list);
+				MessageBox.Show($"{a.ToString()},影响行数:{x.count},错误信息：{x.error}");
+			}
 		}
 
 		private void getSingle(DBHelper a)
@@ -114,7 +120,7 @@ namespace WindowsFormsApp1
 		private void queryTable(DBHelper a)
 		{
 			this.Text = a.ToString();
-			string sql = $"SELECT * FROM a";
+			string sql = $"SELECT * FROM a ORDER BY CreateDateTime DESC";
 			this.dataGridView1.DataSource = a.QueryTable(sql);
 		}
 
@@ -127,7 +133,7 @@ namespace WindowsFormsApp1
 
 		private void button4_Click(object sender, EventArgs e)
 		{
-			addDataList(getInstanceIndex());
+			addDataList(getInstanceIndex(), false);
 		}
 
 		private void button5_Click(object sender, EventArgs e)
@@ -138,6 +144,11 @@ namespace WindowsFormsApp1
 		private void button6_Click(object sender, EventArgs e)
 		{
 			queryTable(getInstanceIndex());
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			addDataList(getInstanceIndex(), true);
 		}
 	}
 }

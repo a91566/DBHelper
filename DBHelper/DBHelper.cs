@@ -79,7 +79,15 @@ namespace zsbApps.DBHelper
 		/// </summary>
 		/// <param name="listSql">执行的 sql 语句集合</param>
 		/// <returns>影响行数</returns>
-		public abstract int ExecuteSql(List<string> listSql);
+		public abstract (int count, string error) ExecuteSql(List<string> listSql);
+
+
+		/// <summary>
+		/// 事务执行 sql 语句
+		/// </summary>
+		/// <param name="listSql">执行的 sql 语句集合</param>
+		/// <returns>影响行数</returns>
+		public abstract int ExecuteTran(List<string> listSql);
 		#endregion
 
 
