@@ -19,3 +19,14 @@ D:\文档\Visual Studio 2017\Projects\201701+\DBHelper\DBHelper\obj\Debug\DBHelp
 D:\文档\Visual Studio 2017\Projects\201701+\DBHelper\DBHelper\obj\Debug\DBHelper.pdb
 D:\文档\Visual Studio 2017\Projects\201701+\DBHelper\DBHelper\bin\Debug\System.ValueTuple.dll
 D:\文档\Visual Studio 2017\Projects\201701+\DBHelper\DBHelper\bin\Debug\System.ValueTuple.xml
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\DBHelper\bin\Debug\DBHelper.dll
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\DBHelper\bin\Debug\DBHelper.pdb
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\DBHelper\bin\Debug\MySql.Data.dll
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\DBHelper\bin\Debug\System.ValueTuple.dll
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\DBHelper\bin\Debug\MySql.Data.xml
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\DBHelper\bin\Debug\System.Data.SQLite.pdb
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\DBHelper\bin\Debug\System.Data.SQLite.dll.config
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\DBHelper\bin\Debug\System.ValueTuple.xml
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\DBHelper\obj\Debug\DBHelper.csprojResolveAssemblyReference.cache
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\DBHelper\obj\Debug\DBHelper.dll
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\DBHelper\obj\Debug\DBHelper.pdb

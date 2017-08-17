@@ -52,6 +52,7 @@ namespace zsbApps.DBHelper
 
 		/// <summary>
 		/// 批量执行 sql 语句
+		/// 遇到执行错误就抛出异常，已经成功的不会回滚
 		/// </summary>
 		/// <param name="listSql">执行的 sql 语句集合</param>
 		/// <returns>影响行数</returns>
@@ -59,29 +60,30 @@ namespace zsbApps.DBHelper
 		{
 			using (SQLiteConnection connection = new SQLiteConnection(this._connStr))
 			{
+				int count = 0;
+				string error = null;
 				try
 				{
 					connection.Open();
-					SQLiteTransaction tran = connection.BeginTransaction();
 					SQLiteCommand cmd = new SQLiteCommand();
 					cmd.Connection = connection;
-					int result = 0;
 					foreach (var item in listSql)
 					{
 						cmd.CommandText = item;
 						int x = cmd.ExecuteNonQuery();
-						result += x >= 0 ? x : 0;
+						count += x >= 0 ? x : 0;
 					}
-					tran.Commit();
-					return (count: result, error:null);
 				}
 				catch (SQLiteException e)
 				{
 					connection.Close();
-					throw e;
+					error = e.Message;
 				}
+				return (count: count, error: error);
 			}
 		}
+
+		
 
 		/// <summary>
 		/// 事务执行 sql 语句
@@ -90,7 +92,43 @@ namespace zsbApps.DBHelper
 		/// <returns>影响行数</returns>
 		public override int ExecuteTran(List<string> listSql)
 		{
-			throw new Exception("Not Implemented");
+			return ExecuteTran(listSql, IsolationLevel.ReadCommitted);
+		}
+
+		/// <summary>
+		/// 事务执行 sql 语句
+		/// </summary>
+		/// <param name="listSql">执行的 sql 语句集合</param>
+		/// <param name="level">指定连接的事务锁定行为</param>
+		/// <returns>影响行数</returns>
+		public override int ExecuteTran(List<string> listSql, IsolationLevel level)
+		{
+			using (SQLiteConnection connection = new SQLiteConnection(this._connStr))
+			{
+				connection.Open();
+				using (SQLiteCommand cmd = connection.CreateCommand())
+				{
+					SQLiteTransaction tran = connection.BeginTransaction(level);
+					cmd.Transaction = tran;
+					try
+					{
+						int x = 0;
+						foreach (var item in listSql)
+						{
+							cmd.CommandText = item;
+							x += cmd.ExecuteNonQuery();
+						}
+						tran.Commit();
+						return x;
+					}
+					catch (SQLiteException ex)
+					{
+						tran.Rollback();
+						connection.Close();
+						throw ex;
+					}
+				}
+			}
 		}
 
 		/// <summary>

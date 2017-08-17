@@ -46,3 +46,20 @@ D:\文档\Visual Studio 2017\Projects\201701+\DBHelper\WindowsFormsApp1\obj\Debu
 D:\文档\Visual Studio 2017\Projects\201701+\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 D:\文档\Visual Studio 2017\Projects\201701+\DBHelper\WindowsFormsApp1\bin\Debug\System.ValueTuple.dll
 D:\文档\Visual Studio 2017\Projects\201701+\DBHelper\WindowsFormsApp1\bin\Debug\System.ValueTuple.xml
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\bin\Debug\DBHelper.dll
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\bin\Debug\MySql.Data.dll
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\bin\Debug\System.ValueTuple.dll
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\bin\Debug\DBHelper.pdb
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\bin\Debug\MySql.Data.xml
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\bin\Debug\System.Data.SQLite.pdb
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\bin\Debug\System.Data.SQLite.dll.config
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\bin\Debug\System.ValueTuple.xml
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojResolveAssemblyReference.cache
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.Cache
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+E:\zsb\vs2017 projects\201701+\DBHelper\DBHelper\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb

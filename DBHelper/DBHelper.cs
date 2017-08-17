@@ -76,6 +76,7 @@ namespace zsbApps.DBHelper
 
 		/// <summary>
 		/// 批量执行 sql 语句
+		/// 遇到执行错误就抛出异常，已经成功的不会回滚
 		/// </summary>
 		/// <param name="listSql">执行的 sql 语句集合</param>
 		/// <returns>影响行数</returns>
@@ -88,6 +89,15 @@ namespace zsbApps.DBHelper
 		/// <param name="listSql">执行的 sql 语句集合</param>
 		/// <returns>影响行数</returns>
 		public abstract int ExecuteTran(List<string> listSql);
+
+
+		/// <summary>
+		/// 事务执行 sql 语句
+		/// </summary>
+		/// <param name="listSql">执行的 sql 语句集合</param>
+		/// <param name="level">指定连接的事务锁定行为</param>
+		/// <returns>影响行数</returns>
+		public abstract int ExecuteTran(List<string> listSql, IsolationLevel level);
 		#endregion
 
 
